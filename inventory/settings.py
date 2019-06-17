@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'inventory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'inventory',
-        'USER':'jvoyugi',
-        'PASSWORD': '8af7943(2',
+        'NAME': '<name>',
+        'USER':'<user>',
+        'PASSWORD': '<password>',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '<port>',
     }
 }
 

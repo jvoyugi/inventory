@@ -1,0 +1,40 @@
+{% extends "../base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+  Log in
+{% endblock title %}
+{% block content %}
+<script>
+  $('.message a').click(function () {
+    $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+  });
+</script>
+<div class="login-page">
+  <div class="form">
+    {% csrf_token %}
+    <form class="login-form" action="{%url 'accounts:login'%}" method="post">
+      {% csrf_token %}
+      <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+        {% for error in form.non_field_errors %}
+        <div class="text-danger">
+            <p>{{ error }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% for field in form %}
+      <div class="form-group">
+        {% render_field field class="form-control" placeholder=field.label %}
+        <div class="{% if field.errors %} invalid{% endif %}">
+          {% for error in field.errors %}
+          <p class="help-block text-danger">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+
+      <button type="submit">log in</button>
+      <p class="message">Not registered? <a href="{%url 'accounts:signup'%}">Create an account</a></p>
+    </form>
+  </div>
+</div>
+{% endblock content %}

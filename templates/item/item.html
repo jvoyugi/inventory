@@ -1,0 +1,73 @@
+{% extends "./index.html" %}
+{% block sidebar %}
+<div class='details'>
+    <h2 style="text-align: center" class="mb-4">Details of {{item.item_id}}</h2>
+    <dl class="row">
+        <dt class="col-sm-4">Name:
+        <dd class="col-sm-8">
+            {{item.name}}
+        </dd>
+        </dt>
+        <dt class="col-sm-4">Amount in store:
+        <dd class="col-sm-8">
+            {{item.item_num}}
+        </dd>
+        </dt>
+        <dt class="col-sm-4">Individual weight:
+            <dd class="col-sm-8">
+                {{item.weight}} {{item.units}}
+            </dd>
+            </dt>
+        <dt class="col-sm-4">Date stored:
+        <dd class="col-sm-8">
+            {{item.date_stored}}
+        </dd>
+        </dt>
+        <dt class="col-sm-4">Store name:
+        <dd class="col-sm-8">
+            {{item.item_store}}
+            <a class="item" href="{%url 'store:details' pk=item.item_store.store_id%}">
+                @{{item.item_store.store_id}}
+            </a>
+        </dd>
+        </dt>
+        <dt class="col-sm-4">Added by:
+            <dd class="col-sm-8">
+                {{item.added_by.first_name}} {{item.added_by.last_name}} 
+                <a class="item" href="{%url 'store:details' pk=item.item_store.store_id%}">
+                    @{{item.added_by.username}}
+                </a>
+            </dd>
+            </dt>
+    </dl>
+    <style>
+        button {
+            margin: 20px;
+        }
+    </style>
+    <div class="btn-group" role="group" aria-label="Button group">
+        <a href="{%url 'item:create'%}">
+            <button class="btn btn-primary">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+                New item
+            </button>
+        </a>
+        <div>
+            <form method="POST" id="item-delete" action="{%url 'item:delete' pk=item.item_id%}" data-url="{%url 'item:delete' pk=item.item_id%}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger>
+                    <span class="fa fa-eraser" aria-hidden="true"></span>
+                    Remove item
+                </button>
+            </form>
+
+        </div>
+    </div>
+    <div class="text-danger">
+        <i>
+            Items removed cannot be recovered. 
+            <strong>Proceed with caution!</strong>
+        </i>
+    </div>
+</div>
+{% endblock sidebar %}

@@ -1,0 +1,32 @@
+{% extends './index.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block sidebar %}
+<h2 class="mb-4">Add Store</h2>
+<form class="create-form" action="{%url 'store:create'%}" data-url="{%url 'store:create'%}" method="post">
+    {% csrf_token %}
+    <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+
+    {% for field in form %}
+    {% if not user.is_superuser %}
+    <div class="form-group row">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% render_field field class="form-control"%}
+        <div class="{% if field.errors %} invalid{% endif %}">
+            {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <button type="submit" id="submit-btn" class="btn btn-primary">Add store</button>
+</form>
+{% endblock sidebar %}
+{% block extrascripts %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock extrascripts %}

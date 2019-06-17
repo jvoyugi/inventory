@@ -1,0 +1,8 @@
+{% extends '../store/index.html' %}
+{% block list_content %}
+<ul>
+      <li>Name: {{user.first_name}} {{user.last_name}}</li>
+      <li>Username: {{user.username}}</li>
+      <li>Email Address: {{user.email}}</li>
+</ul>
+{% endblock list_content %}

@@ -1,0 +1,87 @@
+{% extends "../base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+  Sign up
+{% endblock title %}
+{% block content %}
+<div class="main-w3layouts wrapper">
+  <script type="application/x-javascript">
+    addEventListener("load", 
+    function() { 
+      setTimeout(hideURLbar, 0);
+     },
+      false); 
+    function hideURLbar(){
+       window.scrollTo(0,1);
+       } 
+  </script>
+  <h1>Create Account</h1>
+  <div class="main-agileinfo">
+    <div class="agileits-top">
+      <form action="{%url 'accounts:signup'%}" method="post">
+        {% csrf_token %}
+        <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+          {% for error in form.non_field_errors %}
+          <div class="text-warning">
+            {{ error }}
+          </div>
+          {% endfor %}
+        </div>
+        {% for field in form %}
+
+        <div class="form-group">
+          {% render_field field|attr:"required autofocus" class="form-control" placeholder=field.label %}
+          <div class="{% if field.errors %} invalid{% endif %} text-danger">
+            {% for error in field.errors %}
+            <p class="help-block text-warning">{{ error }}</p>
+            {% endfor %}
+          </div>
+        </div>
+        {%endfor%}
+        <style>
+          button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #4CAF50;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+          }
+
+          button:hover,
+          active,
+          button:focus {
+            background: #43A047;
+          }
+        </style>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>Have an Account? <a href="{%url 'accounts:login'%}"> Login Now!</a></p>
+    </div>
+  </div>
+  <!-- copyright -->
+  <div class="colorlibcopy-agile">
+    <p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/"
+        target="_blank">Colorlib</a></p>
+  </div>
+  <!-- //copyright -->
+  <ul class="colorlib-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+{%endblock content%}

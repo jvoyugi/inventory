@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block title %}
+Items
+{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+{% include '../header.html' %}
+<div class="container-fluid row">
+    <div class="col-sm-8" id="list">
+
+        <div id='loader' style='display: none;'>
+            <img src='{%static "img/image.gif"%}' class="loader">
+        </div>
+
+        {% block list_content %}
+        {% include "item/item_list.html" %}
+        {% endblock list_content %}
+    </div>
+    <div class="col-sm-4" id="item:details">
+        <div id='loader' style='display: none;'>
+            <img src='{%static "img/image.gif"%}' class="loader">
+        </div>
+
+        {% block sidebar %}
+        {% endblock sidebar %}
+    </div>
+</div>
+{%endif%}
+{% endblock content %}

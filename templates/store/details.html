@@ -1,0 +1,64 @@
+{% extends "./index.html" %}
+{% block sidebar %}
+<div class="details">
+    <h2 style="text-align: center" class="mb-4">Details of {{store.store_id}}</h2>
+    <dl class="row">
+        <dt class="col-sm-4">Name:
+        <dd class="col-sm-8">
+            {{store.name}}
+        </dd>
+        </dt>
+        <dt class="col-sm-4">Capacity:
+        <dd class="col-sm-8">
+            {{store.capacity}}
+        </dd>
+        </dt>
+        <dt class="col-sm-4">Items in store:
+        <dd class="col-sm-8">
+            {{store.number_of_items}}
+        </dd>
+        </dt>
+        <dt class="col-sm-4">Store users:
+        <dd class="col-sm-8">
+            <ul>
+
+                {% for user in store.store_users.values_list.values %}
+                <li>{{user.first_name}} {{user.last_name}} <a
+                        href="{%url 'accounts:profile' pk=user.id%}">@{{user.username}}</a></li>
+                {% endfor %}
+            </ul>
+
+
+        </dd>
+        </dt>
+    </dl>
+    <style>
+        button {
+            margin: 20px;
+        }
+    </style>
+    <div class="btn-group" role="group" aria-label="Button group">
+        <a href="{%url 'store:create'%}">
+            <button class="btn btn-primary">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+                New store
+            </button>
+        </a>
+        <div>
+            <form id="item-delete" method="POST" action="{%url 'store:delete' pk=store.store_id%}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    <span class="fa fa-eraser" aria-hidden="true"></span>
+                    Remove store
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="text-danger">
+        <i>
+            Removing this store will also remove all the items stored in it.
+            <strong>Proceed with caution!</strong>
+        </i>
+    </div>
+</div>
+{% endblock sidebar %}

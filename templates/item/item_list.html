@@ -1,0 +1,33 @@
+<script>
+    $(function () {
+        $('#items-table').DataTable();
+    });
+</script>
+<h2 style="text-align: center" class="mb-4">Items currently in the inventory</h2>
+<div id="div-test">
+    <table id="items-table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Item name</th>
+                <th>Units in store</th>
+                <th>Item class</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td scope="row">
+                    <a class="item btn text-danger" data-url="{%url 'item:details' pk=item.item_id%}">
+                        {{item.item_id}}
+                    </a>
+                </td>
+                <td>{{item.name}}</td>
+                <td>{{item.item_num}}</td>
+                <td>{{item.get_item_class_display}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>

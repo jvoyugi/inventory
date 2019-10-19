@@ -10,7 +10,6 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "pythonPath": "C:\\Users\\JAVAN OYUGI\\AppData\\Local\\Continuum\\anaconda3\\python.exe",
         }
     ]
 }

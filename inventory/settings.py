@@ -91,12 +91,8 @@ WSGI_APPLICATION = 'inventory.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '<name>',
-        'USER':'<user>',
-        'PASSWORD': '<password>',
-        'HOST': 'localhost',
-        'PORT': '<port>',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
